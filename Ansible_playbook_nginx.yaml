@@ -1,0 +1,30 @@
+#tasks for install nginx server on 5 servers
+- name: Install nginx on the ec2 linux servers
+  hosts: myservers    #myserver is a variable in the inventory file
+  become: True
+  tasks:
+    - name: install the latest version of nginx
+      command: amazon-linux-extras install -y nginx=latest
+      args:
+        create: /sbin/nginx
+    
+    - name: start nginx service
+      service:
+        name: nginx
+        state: started
+
+    - name: enable nginx service
+      service: nginx
+      state: enabled
+    
+
+    - name: get the version of nginx
+      command: nginx -v
+
+    
+    - name: get the status of nginx service
+      command: systemctl status nginx
+
+
+
+# then run in the master machine  "ansible-playbook Ansible_playbook_nginx.yaml -v" 
