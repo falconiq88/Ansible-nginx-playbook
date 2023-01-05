@@ -1,6 +1,6 @@
 #tasks for install nginx server on 5 servers
 - name: Install nginx on the ec2 linux servers
-  hosts: myservers    #myserver is a variable in the inventory file
+  hosts: {{myservers}}    #myserver is a variable in the inventory file
   become: True
   tasks:
     - name: install the latest version of nginx
